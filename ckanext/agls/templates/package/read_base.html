@@ -37,7 +37,7 @@
     <div class="module context-info">
         <div class="module-content">
             <h1 class="heading" property="dc:title">{{ pkg.title or pkg.name }}</h1>
-
+            {% set num_followers = h.follow_count('dataset', pkg.id) %}
             <div class="nums">
                 <dl>
                     <dt>{{ _('Followers') }}</dt>
@@ -50,4 +50,3 @@
         </div>
     </div>
 {% endblock %}
-
