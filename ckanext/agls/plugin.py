@@ -22,7 +22,7 @@ def get_group_select_list():
     return result
 
 def group_id():
-    id =  request.params.get('group') or request.params.get('groups__0__id')
+    id = request.params.get('grp') or request.params.get('groups__0__id')
     return id
 
 # vocab setup
@@ -157,7 +157,6 @@ class AGLSDatasetPlugin(plugins.SingletonPlugin,
         tk.add_public_directory(config, 'theme/public')
         tk.add_public_directory(config, 'fanstatic/ckanext-agls')
         tk.add_resource('fanstatic', 'ckanext-agls')
-        # config['licenses_group_url'] = 'http://%(ckan.site_url)/licenses.json'
 
 
     def is_fallback(self):
@@ -282,7 +281,9 @@ class AGLSDatasetPlugin(plugins.SingletonPlugin,
             'contact_point': [tk.get_converter('convert_from_extras'),
                               tk.get_validator('ignore_empty')],
             'contact_info': [tk.get_converter('convert_from_extras'),
-                           tk.get_validator('ignore_missing')],
+                             tk.get_validator('ignore_missing')],
+            'unpublished': [tk.get_converter('convert_from_extras'),
+                             tk.get_validator('ignore_missing')],
             'spatial_coverage': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_empty')],
             'spatial': [tk.get_converter('convert_from_extras'),
@@ -333,7 +334,9 @@ class AGLSDatasetPlugin(plugins.SingletonPlugin,
             'contact_point': [tk.get_converter('convert_to_extras'),
                               tk.get_validator('not_empty')],
             'contact_info': [tk.get_validator('ignore_missing'),
-                        tk.get_converter('convert_to_extras')],
+                             tk.get_converter('convert_to_extras')],
+            'unpublished': [tk.get_validator('ignore_missing'),
+                             tk.get_converter('convert_to_extras')],
             'spatial_coverage': [tk.get_converter('convert_to_extras'),
                                  tk.get_validator('not_empty')],
             'spatial': [tk.get_validator('ignore_missing'),

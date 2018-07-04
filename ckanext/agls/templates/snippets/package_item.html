@@ -24,7 +24,7 @@ Example:
       <h3 class="dataset-heading">
         {% if package.private %}
           <span class="dataset-private label label-inverse">
-            <i class="icon-lock"></i>
+            <i class="fa fa-lock"></i>
             {{ _('Private') }}
           </span>
         {% endif %}
@@ -32,21 +32,25 @@ Example:
           {% set external_url = h.get_pkg_dict_extra(package,'harvest_url') %}
           {% set domain_url = external_url.split('/dataset/')[0] %}
           <a class="dataset-label-inverse" href="{{ domain_url }}" target="_blank">
-            <span class="dataset-private label label-inverse">
-              <i class="icon-link"></i>
-              From {{h.get_pkg_dict_extra(package,'harvest_portal')}}
-            </span>
+          <span class="dataset-private label label-inverse">
+            <i class="fa fa-link"></i>
+            From {{h.get_pkg_dict_extra(package,'harvest_portal')}}
+          </span>
           </a>
           <a href="{{h.get_pkg_dict_extra(package,'harvest_url')}}"  data-portal="{{h.get_pkg_dict_extra(package,'harvest_portal')}}" class="searchpartnership-url-analytics" target="_blank"> {{h.truncate(title, truncate_title)}} </a>
         {% else %}
+          {% if package.get('unpublished', '').startswith('True') %}
+          <span class="dataset-private label label-info">{{ _('Unpublished') }}</span>
 
+          {% endif %}
         {{ h.link_to(h.truncate(title, truncate_title), h.url_for(controller='package', action='read', id=package.name)) }}
         {% endif %}
-        {% if package.get('state', '').startswith('draft') %}
+          {% if package.get('state', '').startswith('draft') %}
           <span class="label label-info">{{ _('Draft') }}</span>
-        {% elif package.get('state', '').startswith('deleted') %}
+          {% elif package.get('state', '').startswith('deleted') %}
           <span class="label label-important">{{ _('Deleted') }}</span>
-        {% endif %}
+          {% endif %}
+
         {{ h.popular('recent views', package.tracking_summary.recent, min=10) if package.tracking_summary }}
       </h3>
       {% if banner %}

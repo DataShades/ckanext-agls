@@ -1,6 +1,5 @@
-import ckan.plugins as p
-from ckan.lib.base import BaseController, config
-from ckan.common import OrderedDict, _, json, request, c, g, response
+
+from ckan.common import _, request, c, response
 from ckan.controllers.package import PackageController
 import ckan.logic as logic
 
@@ -9,8 +8,6 @@ import ckan.model as model
 import ckan.lib.helpers as h
 import ckan.lib.render
 
-from genshi.template import MarkupTemplate
-from genshi.template.text import NewTextTemplate
 import ckan.lib.base as base
 import ckan.lib.jsonp as jsonp
 import requests
@@ -42,21 +39,25 @@ class AGLSController(PackageController):
         if q:
             r = requests.get("http://www.ga.gov.au/gazetteer-search/gazetteer2012/select/?q=id:"+q).json()
 
-            for record in r['response']['docs']:
-                locationParts = record['location'].split(',')
-                latitude = locationParts[0]
-                longitude = locationParts[1]
-                result_dict = {'id': record.get('id'),
-                               'name': record.get('id')+": "+record.get('name'),
-                               'latitude': latitude,
-                               'longitude': longitude,
-                               'geojson': '{"type": "Point","coordinates": ['+ longitude+ ','+latitude+']}'}
-                return result_dict
+            try:
+                for record in r['response']['docs']:
+                    locationParts = record['location'].split(',')
+                    latitude = locationParts[0]
+                    longitude = locationParts[1]
+                    result_dict = {'id': record.get('id'),
+                                   'name': record.get('id')+": "+record.get('name'),
+                                   'latitude': latitude,
+                                   'longitude': longitude,
+                                   'geojson': '{"type": "Point","coordinates": ['+ longitude+ ','+latitude+']}'}
+                    return result_dict
+            except:
+                pass
         return {}
 
 
     def gmd(self, id):
         format = 'html'
+
         # response.headers['Content-Type'] = ctype
         response.headers['Content-Type'] = 'application/vnd.iso.19139+xml; charset=utf-8'.encode("ISO-8859-1")
         response.headers["Content-Disposition"] = ("attachment; filename=" + id + ".xml").encode("ISO-8859-1")
@@ -95,7 +96,10 @@ class AGLSController(PackageController):
 
         # used by disqus plugin
         c.current_package_id = c.pkg.id
-        c.related_count = c.pkg.related_count
+        try:
+            c.related_count = c.pkg.related_count
+        except:
+            c.related_count = 0
 
         # can the resources be previewed?
         for resource in c.pkg_dict['resources']:
@@ -116,5 +120,3 @@ class AGLSController(PackageController):
             base.abort(403, msg)
 
         assert False, "We should never get here"
-
-        #return p.toolkit.render('package/read.gmd.xml', loader_class=MarkupTemplate)
