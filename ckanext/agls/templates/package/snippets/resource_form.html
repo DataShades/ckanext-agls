@@ -1,5 +1,9 @@
 {% ckan_extends %}
+{% import 'macros/form.html' as form %}
 
 {% block save_button_text %}{{ _('Finish') }}{% endblock %}
 
-
+{% block basic_fields %}
+    {{ super() }}
+    {{ form.checkbox('datastore_private', label=_('DataStore API is not publicly accessible (if applicable)'), value=True, checked=data.datastore_private, error=errors.datastore_private) }}
+{% endblock %}
