@@ -198,15 +198,7 @@ class AGLSDatasetPlugin(plugins.SingletonPlugin, tk.DefaultDatasetForm):
     plugins.implements(plugins.IConfigurer, inherit=False)
     plugins.implements(plugins.IDatasetForm, inherit=False)
     plugins.implements(plugins.ITemplateHelpers)
-    plugins.implements(plugins.IResourceController, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
-
-    # IResourceController
-
-    def before_show(self, resource_dict):
-        if resource_dict.get('datastore_private') and not c.user:
-            resource_dict['datastore_active'] = False
-        return resource_dict
 
     def before_map(self, map):
         map.connect(
