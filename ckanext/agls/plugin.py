@@ -26,17 +26,6 @@ def _patch_datastore_auth(auth):
     def wrapper(context, data_dict, privilege='resource_update'):
         fn, line, func_name, code = traceback.extract_stack(limit=6)[0]
         logger.info('DatastoreAPI call: {}'.format(func_name))
-        if privilege == 'resource_show' and not context['user']:
-            id = data_dict.get('id') or data_dict.get('resource_id')
-            res = model.Resource.get(id)
-            if res and res.extras.get('datastore_private'):
-                return {
-                    'success': False,
-                    'msg': tk._((
-                        'Anomymous user not authorized to '
-                        'use DataStore API for resource {}'
-                    ).format(id))
-                }
         return original(context, data_dict, privilege)
     ds_auth.datastore_auth = wrapper
 
