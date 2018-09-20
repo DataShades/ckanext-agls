@@ -22,6 +22,7 @@ logger = logging.getLogger(__name__)
 
 def _patch_datastore_auth(auth):
     original = auth.datastore_auth
+
     @wraps(original)
     def wrapper(context, data_dict, privilege='resource_update'):
         fn, line, func_name, code = traceback.extract_stack(limit=6)[0]
@@ -101,7 +102,10 @@ def create_fields_of_research():
     context = {'user': user['name']}
     vocab = model.Vocabulary.get('fields_of_research')
     if not vocab:
-        print "Loading ABS Fields of Research for the first time, please wait..."
+        print (
+            'Loading ABS Fields of Research '
+            'for the first time, please wait...'
+        )
         data = {'name': 'fields_of_research'}
         vocab = tk.get_action('vocabulary_create')(context, data)
         with open(
@@ -309,7 +313,7 @@ class AGLSDatasetPlugin(plugins.SingletonPlugin, tk.DefaultDatasetForm):
                 ],
             })
             schema['resources'].update({
-                'datastore_private': [
+                'datastore_public': [
                     tk.get_validator('default')(False),
                     tk.get_converter('boolean_validator'),
                     tk.get_converter('convert_to_extras'),
@@ -386,7 +390,7 @@ class AGLSDatasetPlugin(plugins.SingletonPlugin, tk.DefaultDatasetForm):
                 ]
             })
             schema['resources'].update({
-                'datastore_private': [
+                'datastore_public': [
                     tk.get_validator('default')(False),
                     tk.get_converter('boolean_validator'),
                     tk.get_converter('convert_to_extras'),
@@ -487,7 +491,7 @@ class AGLSDatasetPlugin(plugins.SingletonPlugin, tk.DefaultDatasetForm):
             ]
         })
         schema['resources'].update({
-            'datastore_private': [
+            'datastore_public': [
                 tk.get_converter('convert_from_extras'),
                 tk.get_validator('default')(False),
                 tk.get_converter('boolean_validator'),
@@ -583,7 +587,7 @@ class AGLSDatasetPlugin(plugins.SingletonPlugin, tk.DefaultDatasetForm):
             ],
         })
         schema['resources'].update({
-            'datastore_private': [
+            'datastore_public': [
                 tk.get_validator('default')(False),
                 tk.get_converter('boolean_validator'),
                 tk.get_converter('convert_to_extras')

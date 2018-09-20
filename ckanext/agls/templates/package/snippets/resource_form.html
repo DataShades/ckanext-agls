@@ -5,5 +5,5 @@
 
 {% block basic_fields %}
     {{ super() }}
-    {{ form.checkbox('datastore_private', label=_('DataStore API is not publicly accessible (if applicable)'), value=True, checked=data.datastore_private, error=errors.datastore_private) }}
+    {{ form.checkbox('datastore_public', label=_('DataStore API is publicly accessible (if applicable)'), value=True, checked=data.datastore_public, error=errors.datastore_public) }}
 {% endblock %}
