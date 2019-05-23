@@ -60,14 +60,19 @@ Example:
       <ul class="dataset-resources unstyled">
         {% for resource in h.dict_list_reduce(package.resources, 'format') %}
           <li>
-   {% if h.get_pkg_dict_extra(package,'harvest_portal') %}
- <a href="{{h.get_pkg_dict_extra(package,'harvest_url')}}" class="label searchpartnership-url-analytics" data-portal="{{h.get_pkg_dict_extra(package,'harvest_portal')}}" data-format="{{ resource.lower() }}">{{ resource }}</a>
-{% else %}
-            <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label" data-format="{{ resource.lower() }}">{{ resource }}</a>
-{% endif %}
+            {% if h.get_pkg_dict_extra(package,'harvest_portal') %}
+              <a href="{{h.get_pkg_dict_extra(package,'harvest_url')}}" class="label searchpartnership-url-analytics" data-portal="{{h.get_pkg_dict_extra(package,'harvest_portal')}}" data-format="{{ resource.lower() }}">{{ resource }}</a>
+            {% else %}
+              <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label" data-format="{{ resource.lower() }}">{{ resource }}</a>
+            {% endif %}
           </li>
         {% endfor %}
       </ul>
+    {% endif %}
+    {% if package.get('data_level') and data_level %}
+      <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label dataset-data-level {{ package.data_level }}">
+        {{ h.scheming_choices_label(h.scheming_field_choices(data_level), package.data_level) }}
+      </a>
     {% endif %}
   {% endblock %}
 </li>

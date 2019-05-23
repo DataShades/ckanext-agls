@@ -1,4 +1,6 @@
  {% set pkg = c.pkg_dict %}
+ {% set schema = h.scheming_get_dataset_schema('dataset') %}
+ {% set data_level = h.scheming_field_by_name(schema.dataset_fields, 'data_level') %}
 
  <section class="additional-info" prefix="dc: http://purl.org/dc/elements/1.1/ dcat: http://www.w3.org/ns/dcat#
          dcam: http://purl.org/dc/dcam/
@@ -168,19 +170,25 @@
                     <td class="dataset-details"> {{ g.site_title }}</td>
                 </tr>
             {% endif %}
-         {% if pkg.get('organization') %}
+            {% if pkg.get('organization') %}
 
             <tr>
                 <th scope="row" class="dataset-label">Publisher/Agency</th>
                 <td class="dataset-details" property="dc:publisher">{{ pkg.organization.title }}
                 </td>
             </tr>
- {% endif %}
+            {% endif %}
 
             {% if pkg.get('field_of_research') %}
                 <tr>
                     <th scope="row" class="dataset-label">Fields of Research</th>
                     <td class="dataset-details"> {{ pkg.field_of_research }}</td>
+                </tr>
+            {% endif %}
+            {% if pkg.get('data_level') %}
+                <tr>
+                    <th scope="row" class="dataset-label">Data Level</th>
+                    <td class="dataset-details"> {{ h.scheming_choices_label(h.scheming_field_choices(data_level),pkg.data_level) }}</td>
                 </tr>
             {% endif %}
             {% if pkg.get('geospatial_topic') %}

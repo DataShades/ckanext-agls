@@ -177,6 +177,26 @@
       "help_text": "The Australian and New Zealand Standard Research Classification (ANZSRC), 2008 defined field or fields of research relevant to the dataset."
     },
     {
+      "field_name": "data_level",
+      "label": "Data Level",
+      "preset": "select",
+      "validators": "scheming_choices scheming_required",
+      "choices": [
+        {
+          "value": "state_level",
+          "label": "State-level"
+        },
+        {
+          "value": "school_level",
+          "label": "School-level"
+        },
+        {
+          "value": "region_level",
+          "label": "Region-level"
+        }
+      ]
+    },
+    {
       "field_name": "syndicated_id",
       "form_snippet": "hidden.html",
       "initial_value": "null"
