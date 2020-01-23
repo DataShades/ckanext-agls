@@ -39,7 +39,7 @@ Example:
           <span class="dataset-private label label-info">{{ _('Unpublished') }}</span>
 
           {% endif %}
-        {{ h.link_to(h.truncate(title, truncate_title), h.url_for(controller='package', action='read', id=package.name)) }}
+        {{ h.link_to(h.truncate(title, truncate_title), h.url_for('dataset.read', id=package.name)) }}
         {% endif %}
           {% if package.get('state', '').startswith('draft') %}
           <span class="label label-info">{{ _('Draft') }}</span>
@@ -63,14 +63,14 @@ Example:
             {% if h.get_pkg_dict_extra(package,'harvest_portal') %}
               <a href="{{h.get_pkg_dict_extra(package,'harvest_url')}}" class="label searchpartnership-url-analytics" data-portal="{{h.get_pkg_dict_extra(package,'harvest_portal')}}" data-format="{{ resource.lower() }}">{{ resource }}</a>
             {% else %}
-              <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label" data-format="{{ resource.lower() }}">{{ resource }}</a>
+              <a href="{{ h.url_for('dataset.read', id=package.name) }}" class="label" data-format="{{ resource.lower() }}">{{ resource }}</a>
             {% endif %}
           </li>
         {% endfor %}
       </ul>
     {% endif %}
     {% if package.get('data_level') and data_level %}
-      <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label dataset-data-level {{ package.data_level }}">
+      <a href="{{ h.url_for('dataset.read', id=package.name) }}" class="label dataset-data-level {{ package.data_level }}">
         {{ h.scheming_choices_label(h.scheming_field_choices(data_level), package.data_level) }}
       </a>
     {% endif %}

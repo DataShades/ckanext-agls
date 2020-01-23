@@ -12,7 +12,7 @@
 
     <span class="label label-inverse label-inverse-json">
         <img src="{{ h.url_for_static('/json-icon.png') }}"/>
-                <a style="color: lightgrey;" href="{{ h.url_for(controller='api', ver=3, action='action', logic_function='package_show', id=c.pkg.id) }}">JSON</a>
+                <a style="color: lightgrey;" href="{{ h.url_for('api.action', ver=3, logic_function='package_show', id=c.pkg.id) }}">JSON</a>
       </span>&nbsp;
     <span class="label label-inverse label-inverse-rdf">
         <img src="{{ h.url_for_static('/rdf-icon.png') }}"/>
@@ -81,7 +81,7 @@
             <tr>
                 <th scope="row" class="dataset-label">{{ _('Landing Page') }}</th>
                 <td class="dataset-details"
-                    property="dct:source"><a href="{{ h.url_for(controller='package', action='read', id=pkg.id, qualified=True) }}">{{ h.url_for(controller='package', action='read', id=pkg.id, qualified=True) }}</a>
+                    property="dct:source"><a href="{{ h.url_for('dataset.read', id=pkg.id, qualified=True) }}">{{ h.url_for('dataset.read', id=pkg.id, qualified=True) }}</a>
                 </td>
             </tr>
 
@@ -215,4 +215,3 @@
 
 
 {% endblock %}
-

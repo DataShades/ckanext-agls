@@ -14,11 +14,11 @@
         xmlns:dct="http://purl.org/dc/terms/"
         xmlns:v="http://www.w3.org/2006/vcard/ns#"
         >
-    <dcat:Dataset rdf:about="${ h.url_for(controller='package',action='read',id=c.pkg_dict['name'], qualified=True)}">
+    <dcat:Dataset rdf:about="${ h.url_for('dataset.read',id=c.pkg_dict['name'], qualified=True)}">
         <dct:identifier>${c.pkg_dict['name']}</dct:identifier>
         <dct:title>${c.pkg_dict['title']}</dct:title>
         <dct:landingPage
-                rdf:resource="${ h.url_for(controller='package',action='read',id=c.pkg_dict['name'], qualified=True) }"/>
+                rdf:resource="${ h.url_for('dataset.read',id=c.pkg_dict['name'], qualified=True) }"/>
         <owl:sameAs rdf:resource="urn:uuid:${c.pkg_dict['id']}"/>
         <dct:type>Dataset</dct:type>
         <dct:description>${c.pkg_dict['notes']}</dct:description>
@@ -90,7 +90,7 @@
         </py:for>
         <dct:language>en</dct:language>
         <foaf:homepage
-                rdf:resource="${ h.url_for(controller='package',action='read',id=c.pkg_dict['name'], qualified=True)}"/>
+                rdf:resource="${ h.url_for('dataset.read',id=c.pkg_dict['name'], qualified=True)}"/>
         <dcat:contactPoint py:if="c.pkg_dict.get('contact_point')">${c.pkg_dict.contact_point }</dcat:contactPoint>
         <py:choose>
             <py:when test="c.pkg_dict.get('spatial',None)">

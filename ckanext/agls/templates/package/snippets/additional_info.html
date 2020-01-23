@@ -57,7 +57,7 @@
             <tr>
                 <th scope="row" class="dataset-label">{{ _('Landing Page') }}</th>
                 <td class="dataset-details"
-                    property="dct:source"><a href="{{ h.url_for(controller='package', action='read', id=pkg.id, qualified=True) }}">{{ h.url_for(controller='package', action='read', id=pkg.id, qualified=True) }}</a>
+                    property="dct:source"><a href="{{ h.url_for('dataset.read', id=pkg.id, qualified=True) }}">{{ h.url_for('dataset.read', id=pkg.id, qualified=True) }}</a>
                 </td>
             </tr>
 
