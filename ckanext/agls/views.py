@@ -32,7 +32,7 @@ def gmd(id, package_type="dataset"):
     try:
         pkg_dict = tk.get_action("package_show")(context, data_dict)
         pkg = context["package"]
-    except tk.NotFound:
+    except tk.ObjectNotFound:
         return tk.abort(404, tk._("Dataset not found"))
     except tk.NotAuthorized:
         return tk.abort(401, tk._("Unauthorized to read package %s") % id)
