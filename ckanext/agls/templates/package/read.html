@@ -12,15 +12,15 @@
 
     <span class="label label-inverse label-inverse-json">
         <img src="{{ h.url_for_static('/json-icon.png') }}"/>
-                <a style="color: lightgrey;" href="{{ h.url_for('api.action', ver=3, logic_function='package_show', id=c.pkg.id) }}">JSON</a>
+                <a style="color: lightgrey;" href="{{ h.url_for('api.action', ver=3, logic_function='package_show', id=pkg.id) }}">JSON</a>
       </span>&nbsp;
     <span class="label label-inverse label-inverse-rdf">
         <img src="{{ h.url_for_static('/rdf-icon.png') }}"/>
-        <a style="color: lightgrey;" href="{{ h.url_for('dataset_read', id=c.pkg.id) }}.rdf">RDF</a>
+        <a style="color: lightgrey;" href="{{ h.url_for('dataset_read', id=pkg.id) }}.rdf">RDF</a>
       </span>&nbsp;
     <span class="label label-inverse label-inverse-xml">
         <i class="icon-file-alt"></i>
-        <a style="color: lightgrey;" href="{{ h.url_for('dataset_read', id=c.pkg.id) }}/gmd">ISO19115/ISO19139 XML</a>
+        <a style="color: lightgrey;" href="{{ h.url_for('dataset_read', id=pkg.id) }}/gmd">ISO19115/ISO19139 XML</a>
     </span>
     {{ super() }}
 {% endblock %}

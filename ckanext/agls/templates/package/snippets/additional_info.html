@@ -1,4 +1,4 @@
- {% set pkg = c.pkg_dict %}
+ {% set pkg = pkg_dict or c.pkg_dict %}
  {% set schema = h.scheming_get_dataset_schema('dataset') %}
  {% set data_level = h.scheming_field_by_name(schema.dataset_fields, 'data_level') %}
 

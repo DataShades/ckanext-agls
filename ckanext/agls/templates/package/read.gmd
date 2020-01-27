@@ -12,10 +12,10 @@
                  xmlns:availterms="http://www.agls.gov.au/agls/availterms/"
                  xmlns:adminterms="http://www.agls.gov.au/agls/adminterms/"
                  xmlns:dct="http://purl.org/dc/terms/">
-    {% set org = c.pkg_dict.get('organization') %}
-    {% set language = c.pkg_dict.get('language') or 'eng' %}
+    {% set org = pkg_dict.get('organization') %}
+    {% set language = pkg_dict.get('language') or 'eng' %}
     <gmd:fileIdentifier>
-        <gco:CharacterString>{{ c.pkg_dict['id'] }}</gco:CharacterString>
+        <gco:CharacterString>{{ pkg_dict['id'] }}</gco:CharacterString>
     </gmd:fileIdentifier>
     <gmd:language>
         <gco:CharacterString>{{ language }}</gco:CharacterString>
@@ -28,7 +28,7 @@
     </gmd:characterSet>
     <gmd:hierarchyLevel>
         <gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
-                          codeListValue="dataset">{{ c.pkg_dict['type'] }}
+                          codeListValue="dataset">{{ pkg_dict['type'] }}
         </gmd:MD_ScopeCode>
     </gmd:hierarchyLevel>
     <gmd:contact>
@@ -51,9 +51,9 @@
                         </gmd:phone>
                         <gmd:address>
                             <gmd:CI_Address>
-                                {% if c.pkg_dict.get('contact_point') %}
+                                {% if pkg_dict.get('contact_point') %}
                                     <gmd:electronicMailAddress>
-                                        <gco:CharacterString>{{ c.pkg_dict['contact_point'] }}</gco:CharacterString>
+                                        <gco:CharacterString>{{ pkg_dict['contact_point'] }}</gco:CharacterString>
                                     </gmd:electronicMailAddress>
                                 {% endif %}
                             </gmd:CI_Address>
@@ -69,7 +69,7 @@
         </gmd:CI_ResponsibleParty>
     </gmd:contact>
     <gmd:dateStamp>
-        <gco:Date>{{ c.pkg_dict['metadata_modified'] }}</gco:Date>
+        <gco:Date>{{ pkg_dict['metadata_modified'] }}</gco:Date>
     </gmd:dateStamp>
     <gmd:metadataStandardName>
         <gco:CharacterString>ANZLIC Metadata Profile: An Australian/New Zealand Profile of AS/NZS ISO 19115:2005,
@@ -84,12 +84,12 @@
             <gmd:citation>
                 <gmd:CI_Citation>
                     <gmd:title>
-                        <gco:CharacterString>{{ c.pkg_dict['name'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ pkg_dict['name'] }}</gco:CharacterString>
                     </gmd:title>
                     <gmd:date>
                         <gmd:CI_Date>
                             <gmd:date>
-                                <gco:Date>{{ c.pkg_dict['metadata_created'] }}</gco:Date>
+                                <gco:Date>{{ pkg_dict['metadata_created'] }}</gco:Date>
                             </gmd:date>
                             <gmd:dateType>
                                 <gmd:CI_DateTypeCode
@@ -99,12 +99,12 @@
                         </gmd:CI_Date>
                     </gmd:date>
                     <edition>
-                        <gco:CharacterString>{{ c.pkg_dict['revision_id'] }}</gco:CharacterString>
+                        <gco:CharacterString>{{ pkg_dict['revision_id'] }}</gco:CharacterString>
                     </edition>
                     <identifier>
                         <MD_Identifier>
                             <code>
-                                <gco:CharacterString>{{ c.pkg_dict['id'] }}</gco:CharacterString>
+                                <gco:CharacterString>{{ pkg_dict['id'] }}</gco:CharacterString>
                             </code>
                         </MD_Identifier>
                     </identifier>
@@ -123,12 +123,12 @@
                 </gmd:CI_Citation>
             </gmd:citation>
             <gmd:abstract>
-                <gco:CharacterString>{{ c.pkg_dict['notes'] }}</gco:CharacterString>
+                <gco:CharacterString>{{ pkg_dict['notes'] }}</gco:CharacterString>
             </gmd:abstract>
             <gmd:language>
                 <gco:CharacterString>{{ language }}</gco:CharacterString>
             </gmd:language>
-            {% set geospatial_topic = c.pkg_dict.get('geospatial_topic', []) %}
+            {% set geospatial_topic = pkg_dict.get('geospatial_topic', []) %}
             {% if geospatial_topic %}
                 <gmd:topicCategory>
                     {% if ',' not in geospatial_topic %}
@@ -144,13 +144,13 @@
                     {% endif %}
                 </gmd:topicCategory>
             {% endif %}
-            {% set data_state = c.pkg_dict.get('data_state') %}
+            {% set data_state = pkg_dict.get('data_state') %}
             {% if data_state %}
                 <gmd:status>
                     <gco:CharacterString>{{ data_state }}</gco:CharacterString>
                 </gmd:status>
             {% endif %}
-            {% set spatial_box = h.spatial_bound(c.pkg_dict.get('spatial')) %}
+            {% set spatial_box = h.spatial_bound(pkg_dict.get('spatial')) %}
             <gmd:extent>
                 <gmd:EX_Extent>
                     {% if spatial_box != None %}
@@ -168,8 +168,8 @@
                         <gmd:EX_TemporalExtent>
                             <gmd:extent>
                                 <gml:TimePeriod gml:id="TP01">
-                                    <gml:beginPosition>{{ c.pkg_dict.get('temporal_coverage_from') }}</gml:beginPosition>
-                                    <gml:endPosition>{{ c.pkg_dict.get('temporal_coverage_to') }}</gml:endPosition>
+                                    <gml:beginPosition>{{ pkg_dict.get('temporal_coverage_from') }}</gml:beginPosition>
+                                    <gml:endPosition>{{ pkg_dict.get('temporal_coverage_to') }}</gml:endPosition>
                                 </gml:TimePeriod>
                             </gmd:extent>
                         </gmd:EX_TemporalExtent>
@@ -181,14 +181,14 @@
     <resourceMaintenance>
         <MD_MaintenanceInformation>
             <maintenanceAndUpdateFrequency>
-                <MD_MaintenanceFrequencyCode codeList="http://asdd.ga.gov.au/asdd/profileinfo/gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="{{ c.pkg_dict.get('update_freq') }}">{{ c.pkg_dict.get('update_freq') }}</MD_MaintenanceFrequencyCode>
+                <MD_MaintenanceFrequencyCode codeList="http://asdd.ga.gov.au/asdd/profileinfo/gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="{{ pkg_dict.get('update_freq') }}">{{ pkg_dict.get('update_freq') }}</MD_MaintenanceFrequencyCode>
             </maintenanceAndUpdateFrequency>
         </MD_MaintenanceInformation>
     </resourceMaintenance>
-    {% if c.pkg_dict.get('tags',[]) %}
+    {% if pkg_dict.get('tags',[]) %}
         <descriptiveKeywords>
             <MD_Keywords>
-                {% for tag_dict in c.pkg_dict.get('tags',[]) %}
+                {% for tag_dict in pkg_dict.get('tags',[]) %}
                     <keyword>
                         <gco:CharacterString>{{ tag_dict["name"] }}</gco:CharacterString>
                     </keyword>
@@ -196,7 +196,7 @@
             </MD_Keywords>
         </descriptiveKeywords>
     {% endif %}
-    {% set field_of_research = c.pkg_dict.get('field_of_research',[]) %}
+    {% set field_of_research = pkg_dict.get('field_of_research',[]) %}
     {% if field_of_research %}
         <descriptiveKeywords>
             <MD_Keywords>
@@ -274,7 +274,7 @@
                 <MD_RestrictionCode codeList="http://asdd.ga.gov.au/asdd/profileinfo/gmxCodelists.xml#MD_RestrictionCode" codeListValue="otherRestrictions">otherRestrictions</MD_RestrictionCode>
             </useConstraints>
             <otherConstraints>
-                <gco:CharacterString>{{ c.pkg_dict.get('license_title').encode('ascii', 'ignore') if c.pkg_dict.get('license_title') else '' }}</gco:CharacterString>
+                <gco:CharacterString>{{ pkg_dict.get('license_title').encode('ascii', 'ignore') if pkg_dict.get('license_title') else '' }}</gco:CharacterString>
             </otherConstraints>
         </MD_LegalConstraints>
     </resourceConstraints>
@@ -288,7 +288,7 @@
     <topicCategory>
         <MD_TopicCategoryCode>geoscientificInformation</MD_TopicCategoryCode>
     </topicCategory>
-    {% for rsc_dict in c.pkg_dict['resources'] %}
+    {% for rsc_dict in pkg_dict['resources'] %}
         <gmd:distributionInfo>
             <gmd:MD_Distribution>
                 <gmd:distributionFormat>
