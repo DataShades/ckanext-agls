@@ -57,7 +57,7 @@ Example:
       {% endif %}
     </div>
     {% if package.resources and not hide_resources %}
-      <ul class="dataset-resources unstyled">
+      <ul class="dataset-resources list-unstyled">
         {% for resource in h.dict_list_reduce(package.resources, 'format') %}
           <li>
             {% if h.get_pkg_dict_extra(package,'harvest_portal') %}
