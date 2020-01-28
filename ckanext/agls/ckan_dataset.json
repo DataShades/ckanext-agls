@@ -180,7 +180,7 @@
       "field_name": "data_level",
       "label": "Data Level",
       "preset": "select",
-      "validators": "scheming_choices scheming_required",
+      "validators": "scheming_choices",
       "choices": [
         {
           "value": "state_level",
