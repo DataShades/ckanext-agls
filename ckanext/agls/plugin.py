@@ -43,7 +43,7 @@ def get_group_select_list():
 
 
 def group_id():
-    id = tk.request.params.get("group") or tk.request.params.get("groups__0__id")
+    id = tk.request.args.get("group") or tk.request.args.get("groups__0__id")
     return id
 
 
