@@ -96,6 +96,7 @@
               {"value": "weekly",     "label": "Weekly"},
               {"value": "monthly",    "label": "Monthly"},
               {"value": "biennial",  "label": "Biennially"},
+              {"value": "biennially",  "label": "Biennially"},
               {"value": "biannual",  "label": "Biannually"},
               {"value": "annual",  "label": "Annually"},
               {"value": "infrequently",  "label": "Infrequently"},
