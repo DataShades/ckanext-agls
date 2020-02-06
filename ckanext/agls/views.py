@@ -57,7 +57,7 @@ def gmd(id, package_type="dataset"):
 
 
 def geo_autocomplete():
-    q = tk.request.params.get("q", "")
+    q = tk.request.args.get("q", "")
     rows = tk.config.get("ckan.agls.gazetter_rows") or "200"
     record_list = []
     if q:
@@ -77,7 +77,7 @@ def geo_autocomplete():
 
 
 def geo_latlon():
-    q = tk.request.params.get("q", "")
+    q = tk.request.args.get("q", "")
     record_list = []
     if q:
         r = requests.get(

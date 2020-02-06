@@ -25,7 +25,7 @@ Example:
                 {% for package in packages %}
                     {% if h.get_pkg_dict_extra(package,'harvest_portal') and first_remote_package%}
                         {% set first_remote_package = False %}
-                        {% if first_package and request.params.get('page',1) == 1%}
+                        {% if first_package and request.args.get('page',1) == 1%}
                             <li class="dataset-item"><center><h2>There are no results on {{ g.site_title }} for this search but we can show results from other sites below</h2></center></li>
                         {% else%}
                             <li class="dataset-item"><center><h1>Results from other Australian data portals</h1></center></li>
@@ -38,4 +38,3 @@ Example:
         </ul>
     {% endif %}
 {% endblock %}
-

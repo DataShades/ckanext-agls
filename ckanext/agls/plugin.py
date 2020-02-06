@@ -43,7 +43,7 @@ def get_group_select_list():
 
 
 def group_id():
-    id = tk.request.params.get("group") or tk.request.params.get("groups__0__id")
+    id = tk.request.args.get("group") or tk.request.args.get("groups__0__id")
     return id
 
 
@@ -51,7 +51,7 @@ def group_id():
 # "Geospatial Topic" and "Field(s) of Research" are tag vocabularies.
 def create_geospatial_topics():
     user = tk.get_action("get_site_user")({"ignore_auth": True}, {})
-    context = {"user": user["name"]}
+    context = {"user": user["name"], "ignore_auth": True}
     vocab = model.Vocabulary.get("geospatial_topics")
     if not vocab:
         data = {"name": "geospatial_topics"}
@@ -106,7 +106,7 @@ def groups():
 def create_fields_of_research():
 
     user = tk.get_action("get_site_user")({"ignore_auth": True}, {})
-    context = {"user": user["name"]}
+    context = {"user": user["name"], "ignore_auth": True}
     vocab = model.Vocabulary.get("fields_of_research")
     if not vocab:
         print("Loading ABS Fields of Research for the first time, please wait...")
@@ -165,7 +165,7 @@ def delete_tags_fields_theme():
 
 def create_fields_theme():
     user = tk.get_action("get_site_user")({"ignore_auth": True}, {})
-    context = {"user": user["name"]}
+    context = {"user": user["name"], "ignore_auth": True}
     vocab = model.Vocabulary.get("fields_theme")
     if not vocab:
         log.info("Loading Fields Theme for the first time, please wait...")
