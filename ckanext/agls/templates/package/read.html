@@ -5,7 +5,7 @@
 
   {% if h.get_pkg_dict_extra(pkg,'harvest_source_title') %}
           <span class="dataset-private label label-inverse">
-            <i class="icon-link"></i>
+            <i class="fa fa-link"></i>
             From {{h.get_pkg_dict_extra(pkg,'harvest_source_title') }}
           </span>
         {% endif %}
@@ -19,7 +19,7 @@
         <a style="color: lightgrey;" href="{{ h.url_for('dataset_read', id=pkg.id) }}.rdf">RDF</a>
       </span>&nbsp;
     <span class="label label-inverse label-inverse-xml">
-        <i class="icon-file-alt"></i>
+        <i class="fa fa-file"></i>
         <a style="color: lightgrey;" href="{{ h.url_for('dataset_read', id=pkg.id) }}/gmd">ISO19115/ISO19139 XML</a>
     </span>
     {{ super() }}
