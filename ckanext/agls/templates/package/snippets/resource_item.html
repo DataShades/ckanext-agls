@@ -19,39 +19,4 @@
             <span class="empty">{{ _('No description for this resource') }}</span>
         {% endif %}
     </p>
-    {% block resource_item_explore %}
-        <div class="dropdown btn-group">
-            <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-share"></i>
-                {{ _('Explore') }}
-                <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                {% block resource_item_explore_links %}
-                    <li>
-                        <a href="{{ url }}" property="accessURL">
-                            {% if res.can_be_previewed %}
-                                <i class="fa fa-bar-chart"></i>
-                                {{ _('Preview') }}
-                            {% else %}
-                                <i class="fa fa-info-circle"></i>
-                                {{ _('More information') }}
-                            {% endif %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ res.url }}" class="resource-url-analytics" target="_blank" property="accessURL">
-                            {% if res.can_be_previewed %}
-                                <i class="fa fa-download"></i>
-                                {{ _('Download') }}
-                            {% else %}
-                                <i class="fa fa-external-link"></i>
-                                {{ _('Go to resource') }}
-                            {% endif %}
-                        </a>
-                    </li>
-                {% endblock %}
-            </ul>
-        </div>
-    {% endblock %}
 </li>
