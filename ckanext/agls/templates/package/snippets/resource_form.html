@@ -21,7 +21,8 @@
         <option value="">Please Select</option>
 
         {% for format in h.formats() %}
-        <option value="{{ format }}">{{ format }}</option>
+        <option value="{{ format }}"
+              {% if format == data.format %}selected{% endif %}>{{ format }}</option>
         {% endfor %}
       </select>
 
