@@ -69,25 +69,25 @@ class AGLSController(PackageController):
                 return result_dict
         return {}
 
-    def gmd(self, id):
+    def gmd(self, id, package_type="dataset"):
         format = 'html'
-        loader = MarkupTemplate
-        if not format == 'html':
-            ctype, extension, = \
-                self._content_type_from_extension(format)
-            if not ctype:
+        #loader = MarkupTemplate
+        #if not format == 'html':
+        #    ctype, extension, = \
+        #        self._content_type_from_extension(format)
+        #    if not ctype:
                 # An unknown format, we'll carry on in case it is a
                 # revision specifier and re-constitute the original id
-                id = "%s.%s" % (id, format)
-                ctype, format = "text/html; charset=utf-8", "html"
+        #        id = "%s.%s" % (id, format)
+        #        ctype, format = "text/html; charset=utf-8", "html"
 
-        else:
-            ctype, format = self._content_type_from_accept()
+        #else:
+        #    ctype, format = self._content_type_from_accept()
 
         # response.headers['Content-Type'] = ctype
         response.headers['Content-Type'] = 'application/vnd.iso.19139+xml; charset=utf-8'.encode("ISO-8859-1")
         response.headers["Content-Disposition"] = ("attachment; filename=" + id + ".xml").encode("ISO-8859-1")
-        package_type = self._get_package_type(id.split('@')[0])
+        #package_type = self._get_package_type(id.split('@')[0])
         context = {'model': model, 'session': model.Session,
                    'user': c.user or c.author, 'for_view': True,
                    'auth_user_obj': c.userobj}
@@ -112,30 +112,39 @@ class AGLSController(PackageController):
                        'Too many "@" symbols')
 
         # check if package exists
-        try:
-            c.pkg_dict = logic.get_action('package_show')(context, data_dict)
-            c.pkg = context['package']
-        except NotFound:
-            base.abort(404, _('Dataset not found'))
-        except NotAuthorized:
-            base.abort(401, _('Unauthorized to read package %s') % id)
+        # try:
+        #     c.pkg_dict = logic.get_action('package_show')(context, data_dict)
+        #     c.pkg = context['package']
+        # except NotFound:
+        #     base.abort(404, _('Dataset not found'))
+        # except NotAuthorized:
+        #     base.abort(401, _('Unauthorized to read package %s') % id)
 
         # used by disqus plugin
-        c.current_package_id = c.pkg.id
-        c.related_count = c.pkg.related_count
+        #c.current_package_id = c.pkg.id
+        #c.related_count = c.pkg.related_count
+
+        #self._setup_template_variables(context, {'id': id},
+        #                               package_type=package_type)
+        data_dict = {'id': id}
+        try:
+            pkg_dict = logic.get_action("package_show")(context, data_dict)
+            pkg = context["package"]
+        except tk.ObjectNotFound:
+            return tk.abort(404, tk._("Dataset not found"))
+        except tk.NotAuthorized:
+            return tk.abort(401, tk._("Unauthorized to read package %s") % id)
 
         # can the resources be previewed?
-        for resource in c.pkg_dict['resources']:
+        for resource in pkg_dict['resources']:
             resource['can_be_previewed'] = self._resource_preview(
-                {'resource': resource, 'package': c.pkg_dict})
+                {'resource': resource, 'package': pkg_dict})
 
-        self._setup_template_variables(context, {'id': id},
-                                       package_type=package_type)
-
+        extra_vars = {"dataset_type": package_type, "pkg": pkg, "pkg_dict": pkg_dict}
         template = 'package/read.gmd'
 
         try:
-            return base.render(template, loader_class=loader)
+            return base.render(template, extra_vars)
         except ckan.lib.render.TemplateNotFound:
             msg = _("Viewing {package_type} datasets in {format} format is "
                     "not supported (template file {file} not found).".format(
