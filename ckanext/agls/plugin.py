@@ -114,7 +114,7 @@ def create_fields_of_research():
         vocab = tk.get_action("vocabulary_create")(context, data)
         with open(
             os.path.dirname(os.path.abspath(__file__)) + "/ABS Fields Of Research.csv",
-            "rb",
+            "r",
         ) as csvfile:
             forcsv = csv.reader(csvfile)
             for row in forcsv:
