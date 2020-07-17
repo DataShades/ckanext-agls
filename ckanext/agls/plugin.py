@@ -70,7 +70,7 @@ def formats():
     defined_formats = set(map(lambda (_1, format, _3): format, h.resource_formats().values()))
     sorted_formats = sorted(defined_formats, key=lambda format: format.upper())
     return sorted_formats
-    
+
 def create_fields_of_research():
 
     user = tk.get_action('get_site_user')({'ignore_auth': True}, {})
@@ -178,8 +178,8 @@ class AGLSDatasetPlugin(plugins.SingletonPlugin,
     def get_helpers(self):
         return {'fields_of_research': fields_of_research, 'geospatial_topics': geospatial_topics,
                 'get_group_select_list': get_group_select_list, 'spatial_bound': spatial_bound,
-                'get_user_full': get_user_full, 'get_org_full': get_org_full, 'groups': groups, 
-                'formats': formats, 'group_id': group_id, 'is_hosted': is_hosted, 
+                'get_user_full': get_user_full, 'get_org_full': get_org_full, 'groups': groups,
+                'formats': formats, 'group_id': group_id, 'is_hosted': is_hosted,
                 'get_pkg_obj_extra': get_pkg_obj_extra, 'get_popular_tags': get_popular_tags}
 
     def update_config(self, config):
@@ -231,8 +231,6 @@ class AGLSDatasetPlugin(plugins.SingletonPlugin,
 
             'contact_point': [tk.get_converter('convert_from_extras'),
                               tk.get_validator('ignore_empty')],
-            'contact_info': [tk.get_converter('convert_from_extras'),
-                           tk.get_validator('ignore_missing')],
             'spatial_coverage': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_empty')],
             'spatial': [tk.get_converter('convert_from_extras'),
@@ -275,8 +273,6 @@ class AGLSDatasetPlugin(plugins.SingletonPlugin,
      'notes': [tk.get_validator('not_empty')],
             'contact_point': [tk.get_converter('convert_to_extras'),
                               tk.get_validator('not_empty')],
-            'contact_info': [tk.get_validator('ignore_missing'),
-                        tk.get_converter('convert_to_extras')],
             'spatial_coverage':[tk.get_converter('convert_to_extras'),
                               tk.get_validator('not_empty')],
             'spatial': [tk.get_validator('ignore_missing'),

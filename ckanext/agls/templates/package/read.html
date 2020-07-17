@@ -144,19 +144,6 @@
                 </tr>
             {% endif %}
 
-            {% if pkg.get('contact_info') and pkg.get('contact_info') == 'True' %}
-            {% set contact = h.get_user_full(pkg.maintainer) %}
-            {%  if contact %}
-            <tr>
-                <th scope="row" class="dataset-label">Contact Point</th>
-                <td class="dataset-details" property="dcat:contactPoint">
-                    <div about="http://" typeof="v:VCard">
-                        <span property="v:fn">{{ contact.display_name }}</span><br/>
-                    <span property="v:email"> {{ h.mail_to(email_address=contact.email, name=contact.email) }}</span>
-                    </div>
-                </td>
-            </tr>
-            {% endif %}{% endif %}
             {% if pkg.get('data_granularity') %}
                 <tr>
                     <th scope="row" class="dataset-label">Data Granularity</th>
@@ -223,4 +210,3 @@ to {{h.render_datetime(pkg.temporal_coverage_to,date_format) }}
 
 
 {% endblock %}
-
