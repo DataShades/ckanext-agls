@@ -106,14 +106,6 @@
       "preset": "update_frequency"
     },
     {
-      "field_name": "contact_info",
-      "label": "Expose User Contact Information",
-      "form_snippet": "checkbox_agls.html",
-      "validators": "boolean_validator",
-      "form_value": "true",
-      "help_text": "Whether the user contact details should be public as well as the organisation contact details."
-    },
-    {
       "label": "Theme",
       "field_name": "theme",
       "preset": "theme",

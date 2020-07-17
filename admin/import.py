@@ -148,8 +148,6 @@ class Importer(Thread):
 
         pkg = dict(
             author=self.dataset['publisher'],
-            contact_info=boolean_validator(
-                self.dataset['expose user contact information'], 0),
             contact_point=self.dataset['contact email'],
             data_model=self.dataset['data models'],
             data_state=self.dataset['data status'].lower(),

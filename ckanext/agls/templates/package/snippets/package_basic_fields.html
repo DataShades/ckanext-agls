@@ -113,13 +113,6 @@ selected = data.update_freq, options=
 error=errors.update_freq, classes=['control-full'], is_required='true') %}
         How often the dataset is updated. Eg: Daily, Weekly, Never
     {% endcall %}
-
-    {% call form.checkbox('contact_info', checked=data.contact_info, label='Expose User Contact Information', value='True') %}
-        <br/>
-        <span title="This field is required" class="control-required">*</span>Whether the user contact details should be
-        public as well as the organisation contact details.
-
-    {% endcall %}
     {% if data.groups %}
         <div class="control-group">
             <label class="control-label">AGIFT Themes</label>
