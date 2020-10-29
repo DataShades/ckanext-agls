@@ -90,26 +90,6 @@
             {% endif %}
  {% endif %}
 
-            {% if pkg.get('contact_point') and pkg.get('organization') %}
-                <tr>
-                    <th scope="row" class="dataset-label">Contact Point</th>
-                    <td class="dataset-details" property="dcat:contactPoint">
-                        <div about="http://" typeof="v:VCard">
-                            <span property="v:fn">{{ pkg.organization.title }}</span><br/>
-                            {% set org_full = h.get_org_full(pkg.organization.id) %}
-                            {% if h.get_pkg_dict_extra(org_full,'telephone') %}
-                            <span rel="v:tel">
-                                <span typeof="v:Tel v:Home">
-                                    <span property="rdf:value">{{ h.get_pkg_dict_extra(org_full,'telephone') }}</span>
-                                </span>
-                            </span><br/>
-                            {% endif %}
-                    <span property="v:email"> {{ h.mail_to(email_address=pkg.contact_point, name=pkg.contact_point) }}</span>
-                        </div>
-                    </td>
-                </tr>
-            {% endif %}
-
             {% if pkg.get('contact_info') and pkg.get('contact_info') == 'true' %}
             {% set contact = h.get_user_full(pkg.maintainer) %}
             {%  if contact %}
