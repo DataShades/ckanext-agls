@@ -215,14 +215,16 @@ def spatial_bound(spatial_str):
 
 
 def get_user_full(username):
-    try:
-        return tk.get_action("user_show")(
-            {"return_minimal": True, "keep_sensitive_data": True, "keep_email": True},
-            {"id": username},
-        )
-    except tk.ObjectNotFound:
-        return None
-
+    user_details = tk.asbool(tk.config.get("ckan.auth.public_user_details", True))
+    if user_details:
+        try:
+            return tk.get_action("user_show")(
+                {"return_minimal": True, "keep_sensitive_data": True, "keep_email": True},
+                {"id": username},
+            )
+        except tk.ObjectNotFound:
+            return None
+    return None
 
 def get_org_full(id):
     try:
