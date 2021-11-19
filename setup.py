@@ -25,5 +25,7 @@ setup(
 
 	[paste.paster_command]
         initdb = ckanext.agls.command:InitDB
+        [ckan.click_command]
+        agls = ckanext.agls.cli:agls
 	""",
 )
