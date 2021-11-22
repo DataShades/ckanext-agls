@@ -95,34 +95,25 @@ def create_fields_theme():
 
 def geospatial_topics():
     create_geospatial_topics()
-    try:
-        tag_list = tk.get_action("tag_list")
-        geospatial_topics = tag_list(data_dict={"vocabulary_id": "geospatial_topics"})
-        return geospatial_topics
-    except tk.ObjectNotFound:
-        return None
-
+    tag_list = tk.get_action("tag_list")
+    geospatial_topics = tag_list(data_dict={"vocabulary_id": "geospatial_topics"})
+    return geospatial_topics
 
 
 def fields_of_research():
     create_fields_of_research()
-    try:
-        tag_list = tk.get_action("tag_list")
-        fields_of_research = tag_list(
-            data_dict={"vocabulary_id": "fields_of_research", "all_fields": False}
-        )
-        return fields_of_research
-    except tk.ObjectNotFound:
-        return None
+    tag_list = tk.get_action("tag_list")
+    fields_of_research = tag_list(
+        data_dict={"vocabulary_id": "fields_of_research", "all_fields": False}
+    )
+    return fields_of_research
 
 
 def fields_theme():
     create_fields_theme()
-    try:
-        tag_list = tk.get_action("tag_list")
-        fields_theme = tag_list(
-            data_dict={"vocabulary_id": "fields_theme", "all_fields": False}
-        )
-        return fields_theme
-    except tk.ObjectNotFound:
-        return None
+
+    tag_list = tk.get_action("tag_list")
+    fields_theme = tag_list(
+        data_dict={"vocabulary_id": "fields_theme", "all_fields": False}
+    )
+    return fields_theme
