@@ -8,7 +8,7 @@ import ckan.lib.base as base
 import ckan.model as model
 import ckan.plugins.toolkit as tk
 import ckan.views.dataset as dataset
-
+from . import utils
 
 agls = Blueprint("agls", __name__)
 
@@ -80,26 +80,7 @@ def geo_latlon():
     q = tk.request.args.get("q", "")
     record_list = []
     if q:
-        r = requests.get(
-            "http://www.ga.gov.au/gazetteer-search/gazetteer2012/select/?q=id:" + q
-        ).json()
-
-        for record in r["response"]["docs"]:
-            locationParts = record["location"].split(",")
-            latitude = locationParts[0]
-            longitude = locationParts[1]
-            result_dict = {
-                "id": record.get("id"),
-                "name": record.get("id") + ": " + record.get("name"),
-                "latitude": latitude,
-                "longitude": longitude,
-                "geojson": '{"type": "Point","coordinates": ['
-                + longitude
-                + ","
-                + latitude
-                + "]}",
-            }
-            return result_dict
+        return utils.details_for_gaz_id(q)
     return {}
 
 

@@ -2,6 +2,8 @@ import os
 import csv
 import logging
 
+import requests
+
 import ckan.model as model
 import ckan.plugins.toolkit as tk
 
@@ -117,3 +119,26 @@ def fields_theme():
         data_dict={"vocabulary_id": "fields_theme", "all_fields": False}
     )
     return fields_theme
+
+
+def details_for_gaz_id(id_):
+    r = requests.get(
+        "http://www.ga.gov.au/gazetteer-search/gazetteer2012/select/?q=id:" + id_
+    ).json()
+
+    for record in r["response"]["docs"]:
+        locationParts = record["location"].split(",")
+        latitude = locationParts[0]
+        longitude = locationParts[1]
+        result_dict = {
+            "id": record.get("id"),
+            "name": record.get("id") + ": " + record.get("name"),
+            "latitude": latitude,
+            "longitude": longitude,
+            "geojson": '{"type": "Point","coordinates": ['
+            + longitude
+            + ","
+            + latitude
+            + "]}",
+        }
+        return result_dict
