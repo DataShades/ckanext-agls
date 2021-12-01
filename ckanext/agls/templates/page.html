@@ -92,8 +92,8 @@
          });
          gazSearch($("#field-spatial_coverage").val());
          $(function() {
-             $( "#field-temporal_coverage_from" ).datepicker();
-             $( "#field-temporal_coverage_to" ).datepicker();
+             $( "#field-temporal_coverage_from" ).not("[type=date]").datepicker();
+             $( "#field-temporal_coverage_to" ).not("[type=date]").datepicker();
          });
          $("#field-organizations").change(function (e) {
              setValueIfOrg(e.target.value);
