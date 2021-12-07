@@ -122,10 +122,13 @@ def fields_theme():
 
 
 def details_for_gaz_id(id_):
-    r = requests.get(
-        "http://www.ga.gov.au/gazetteer-search/gazetteer2012/select/?q=id:" + id_
-    ).json()
-
+    try:
+        r = requests.get(
+            "http://www.ga.gov.au/gazetteer-search/gazetteer2012/select/?q=id:" + id_,
+            timeout=tk.asint(tk.config.get("ckanext.agls.gazetteer.request.timeout", 3))
+        ).json()
+    except requests.ConnectTimeout:
+        return
     for record in r["response"]["docs"]:
         locationParts = record["location"].split(",")
         latitude = locationParts[0]
