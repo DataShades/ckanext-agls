@@ -1,0 +1,10 @@
+{% set author = pkg_dict.get('dataset_author') %}
+{% set doi = pkg_dict.get('doi') %}
+{% if author and doi %}
+  <section class="module module-narrow module-shallow">
+    <h2 class="module-heading"><i class="fa fa-lock"></i> {{ _('Citation') }}</h2>
+    <p class="module-content">
+      {{ '%s, %s, %s'|format(pkg_dict.title, author, doi) }}
+    </p>
+  </section>
+{% endif %}

@@ -177,6 +177,18 @@
                     <td class="dataset-details"> {{ pkg.geospatial_topic }}</td>
                 </tr>
             {% endif %}
+            {% if pkg.get('doi') %}
+              <tr>
+                <th scope="row" class="dataset-label">DOI</th>
+                <td class="dataset-details"> {{ pkg.doi }}</td>
+              </tr>
+            {% endif %}
+            {% if pkg.get('dataset_author') %}
+              <tr>
+                <th scope="row" class="dataset-label">Author</th>
+                <td class="dataset-details"> {{ pkg.dataset_author }}</td>
+              </tr>
+            {% endif %}
             </tbody>
         </table>
     </section>

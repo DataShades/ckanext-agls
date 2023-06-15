@@ -1,0 +1,10 @@
+{% if pkg_dict.get('rights_statement', 'false') == 'true' %}
+  <section>
+    <h2>{{ _('Rights Statement') }}</h2>
+    <p>The owners of this data may provide access by negotiation. Please note that if requested, you may be required
+      to provide justification for your request and subject to costs associated with the provision of the data. Data
+      released can only be used for the intended purposes, as agreed by the owners. Use of the data may be subject
+      to legal, ethical or commercial restrictions requiring permission from other individuals or groups, including
+      ethics committees and research.</p>
+  </section>
+{% endif %}

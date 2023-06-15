@@ -32,3 +32,29 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 {% endblock -%}
+
+{% block secondary_content %}
+
+  {% block secondary_help_content %}{% endblock %}
+
+  {% block package_info %}
+    {{ super() }}
+  {% endblock %}
+
+  {% block package_organization %}
+    {{ super() }}
+  {% endblock %}
+
+  {% block package_social %}
+    {{ super() }}
+  {% endblock %}
+
+  {% block package_license %}
+    {{ super() }}
+  {% endblock %}
+
+  {% block package_citation %}
+    {% snippet "snippets/citation.html", pkg_dict=pkg %}
+  {% endblock %}
+
+{% endblock %}
