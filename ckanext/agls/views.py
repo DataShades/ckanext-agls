@@ -17,6 +17,7 @@ def get_blueprints():
     return [agls]
 
 
+@agls.route("/<package_type>/<id>/gmd")
 def gmd(id, package_type="dataset"):
     format = "html"
 
@@ -56,6 +57,7 @@ def gmd(id, package_type="dataset"):
     return response
 
 
+@agls.route("/api/2/util/gazetteer/autocomplete")
 def geo_autocomplete():
     q = tk.request.args.get("q", "")
     rows = tk.config.get("ckan.agls.gazetter_rows") or "200"
@@ -76,18 +78,10 @@ def geo_autocomplete():
     return jsonify(record_list)
 
 
+@agls.route("/api/2/util/gazetteer/latlon")
 def geo_latlon():
     q = tk.request.args.get("q", "")
-    record_list = []
+
     if q:
-        return utils.details_for_gaz_id(q)
-    return {}
-
-
-agls.add_url_rule("/<package_type>/<id>/gmd", view_func=gmd)
-agls.add_url_rule(
-    "/api/2/util/gazetteer/autocomplete", view_func=geo_autocomplete,
-)
-agls.add_url_rule(
-    "/api/2/util/gazetteer/latlon", view_func=geo_latlon,
-)
+        return jsonify(utils.details_for_gaz_id(q))
+    return jsonify({})

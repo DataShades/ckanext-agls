@@ -144,4 +144,3 @@ class AGLSDatasetPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
 
         with open(os.path.join(here, "languages.json")) as languages:
             config["iso638.2"] = json.load(languages)
-        # config['licenses_group_url'] = 'http://%(ckan.site_url)/licenses.json'
