@@ -1,0 +1,18 @@
+{#
+pkg
+#}
+
+<span class="label label-inverse label-inverse-json">
+    <img src="{{ h.url_for_static('/json-icon.png') }}"/>
+    <a style="color: lightgrey;" href="{{ h.url_for('api.action', ver=3, logic_function='package_show', id=pkg.id) }}">JSON</a>
+</span>
+
+<span class="label label-inverse label-inverse-rdf">
+    <img src="{{ h.url_for_static('/rdf-icon.png') }}"/>
+    <a style="color: lightgrey;" href="{{ h.url_for('dataset.read', id=pkg.id) }}.rdf">RDF</a>
+</span>
+
+<span class="label label-inverse label-inverse-xml">
+    <i class="fa fa-file"></i>
+    <a style="color: lightgrey;" href="{{ h.url_for('dataset.read', id=pkg.id) }}/gmd">ISO19115/ISO19139 XML</a>
+</span>
