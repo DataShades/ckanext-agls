@@ -7,10 +7,14 @@ import json
 import logging
 import os
 
+try:
+    from shapely.geometry import asShape
+except ImportError:
+    from shapely.geometry import shape as asShape
+
 import ckan.model as model
 import ckan.plugins as p
 import ckan.plugins.toolkit as tk
-from shapely.geometry import asShape
 
 import ckanext.agls.views as views
 import ckanext.agls.utils as utils
@@ -140,4 +144,3 @@ class AGLSDatasetPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
 
         with open(os.path.join(here, "languages.json")) as languages:
             config["iso638.2"] = json.load(languages)
-        # config['licenses_group_url'] = 'http://%(ckan.site_url)/licenses.json'

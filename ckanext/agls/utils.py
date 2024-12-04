@@ -2,6 +2,7 @@ import os
 import csv
 import logging
 
+import itertools
 import requests
 
 import ckan.model as model
@@ -48,7 +49,7 @@ def create_fields_of_research():
     context = {"user": user["name"], "ignore_auth": True}
     vocab = model.Vocabulary.get("fields_of_research")
     if not vocab:
-        print("Loading ABS Fields of Research for the first time, please wait...")
+        log.info("Loading ABS Fields of Research for the first time, please wait...")
         data = {"name": "fields_of_research"}
         vocab = tk.get_action("vocabulary_create")(context, data)
         with open(
@@ -56,13 +57,15 @@ def create_fields_of_research():
             "r",
         ) as csvfile:
             forcsv = csv.reader(csvfile)
+            if tk.asbool(tk.config.get("testing")):
+                forcsv = itertools.islice(forcsv, 10)
             for row in forcsv:
                 data = {
                     "name": row[1].strip().replace(",", "")[:100],
                     "vocabulary_id": vocab["id"],
                 }
                 tk.get_action("tag_create")(context, data)
-        print("ABS Fields of Research loaded")
+        log.info("ABS Fields of Research loaded")
 
 
 def create_fields_theme():
