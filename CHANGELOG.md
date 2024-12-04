@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <small>[Compare with latest](https://github.com/DataShades/ckanext-agls/compare/v0.0.1...HEAD)</small>
 
+### Features
+
+- export buttons archived into agls/snippets/package_export.html ([2aa03fb](https://github.com/DataShades/ckanext-agls/commit/2aa03fb504072f2f6d5b96571bf2bcf41693cf57) by Sergey Motornyuk).
+
 ### Bug Fixes
 
 - restore latlon view ([e108d41](https://github.com/DataShades/ckanext-agls/commit/e108d4192c86ebe2c0c79070cbca8da75f99cacf) by Sergey Motornyuk).
