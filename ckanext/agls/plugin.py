@@ -137,8 +137,6 @@ class AGLSDatasetPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
     def update_config(self, config):
         tk.add_template_directory(config, "templates")
         tk.add_public_directory(config, "theme/public")
-        tk.add_public_directory(config, "fanstatic/ckanext-agls")
-        tk.add_resource("fanstatic", "ckanext-agls")
 
         here = os.path.dirname(__file__)
 

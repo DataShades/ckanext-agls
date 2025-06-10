@@ -9,9 +9,9 @@
         <select id="field-group" name="{{ field.field_name }}" multiple data-module="autocomplete">
             {% for group in h.fields_theme() %}
                 <option value="{{ group }}"
-                    {% for item in data_theme %}
+                        {% for item in data_theme %}
                         {% if group == item.strip() %}selected="selected"{% endif %}
-                    {% endfor%}>
+                        {% endfor%}>
                     {{ group }}</option>
             {% endfor %}
         </select>

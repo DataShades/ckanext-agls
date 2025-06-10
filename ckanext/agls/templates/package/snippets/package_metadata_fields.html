@@ -20,16 +20,16 @@ won't work. #}
                 {% endfor %}
             </select>
 
-        The high level <a target="_blank"
-            href="https://www2.landgate.wa.gov.au/interragatorplus/help/index.html?iso_19115_topic_categories.htm">ISO19115</a>
-        topics. Optional but recommended.
+            The high level <a target="_blank"
+                              href="https://www2.landgate.wa.gov.au/interragatorplus/help/index.html?iso_19115_topic_categories.htm">ISO19115</a>
+            topics. Optional but recommended.
         </div>
     </div>
 
 
     {% call form.markdown('data_model', label=_('Data Models'), id='field-data-model',
-placeholder=_('Information on any relevant data models, ontologies, taxonomies etc specific to this dataset.'),
-value=data.data_model, error=errors.data_model, classes=['control-full']) %}
+        placeholder=_('Information on any relevant data models, ontologies, taxonomies etc specific to this dataset.'),
+        value=data.data_model, error=errors.data_model, classes=['control-full']) %}
 
 
         Please add any links to information on relevant data models, ontologies, taxonomies etc specific to your
@@ -42,7 +42,7 @@ value=data.data_model, error=errors.data_model, classes=['control-full']) %}
 
         <div class="controls">
             <!--[if lte IE 8]>
-            <select id="field-field_of_research" name="field_of_research" multiple="multiple">
+                <select id="field-field_of_research" name="field_of_research" multiple="multiple">
             <![endif]-->
             <!--[if gte IE 9]> -->
             <select id="field-field_of_research" name="field_of_research" multiple data-module="autocomplete">
@@ -56,15 +56,15 @@ value=data.data_model, error=errors.data_model, classes=['control-full']) %}
             <br/>
             The Australian and New Zealand Standard Research Classification (ANZSRC), 2008 defined <a target="_blank"
                                                                                                       href="http://www.abs.gov.au/AUSSTATS/abs@.nsf/0/6BB427AB9696C225CA2574180004463E?opendocument">field or
-            fields of research</a> relevant to the dataset.
+                fields of research</a> relevant to the dataset.
         </div>
 
     </div>
 
     {% call form.select('data_level', label=_('Data Level'), id='field-data_level', selected=data.data_level, options=
         [{'value': 'state_level', 'text': 'State-level'},
-        {'value': 'school_level', 'text': 'School-level'},
-        {'value': 'region_level', 'text': 'Region-level'}], error=errors.data_level, classes=['control-full']) %}
+            {'value': 'school_level', 'text': 'School-level'},
+            {'value': 'region_level', 'text': 'Region-level'}], error=errors.data_level, classes=['control-full']) %}
     {% endcall %}
 
     {{ super() }}
